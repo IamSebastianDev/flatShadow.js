@@ -136,9 +136,11 @@ class FlatShadow {
 
 		this.elementDimensions = this.elementToAttachTo.getBoundingClientRect();
 
-		window.addEventListener('scroll', () => {
-			this.elementDimensions = this.elementToAttachTo.getBoundingClientRect();
-		});
+		if (this.trackingEnabled) {
+			window.addEventListener('scroll', () => {
+				this.elementDimensions = this.elementToAttachTo.getBoundingClientRect();
+			});
+		}
 	}
 
 	// method used to check for touch and stylus devices, to disable tracking shadows
@@ -312,6 +314,7 @@ class FlatShadow {
 
 	setAngle(angle) {
 		this.angle = angle;
+		this.elementDimensions = this.elementToAttachTo.getBoundingClientRect();
 		this.renderShadow();
 	}
 
@@ -321,6 +324,7 @@ class FlatShadow {
 
 	setColor(color) {
 		this.color = color;
+		this.elementDimensions = this.elementToAttachTo.getBoundingClientRect();
 		this.renderShadow();
 	}
 
@@ -330,6 +334,7 @@ class FlatShadow {
 
 	setBlur(blur) {
 		this.blur = blur;
+		this.elementDimensions = this.elementToAttachTo.getBoundingClientRect();
 		this.renderShadow();
 	}
 
@@ -339,6 +344,7 @@ class FlatShadow {
 
 	setStepSize(step) {
 		this.step = step;
+		this.elementDimensions = this.elementToAttachTo.getBoundingClientRect();
 		this.renderShadow();
 	}
 
@@ -348,6 +354,7 @@ class FlatShadow {
 
 	setLength(length) {
 		this.shadowLength = length;
+		this.elementDimensions = this.elementToAttachTo.getBoundingClientRect();
 		this.renderShadow();
 	}
 }
