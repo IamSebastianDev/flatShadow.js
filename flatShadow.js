@@ -53,14 +53,14 @@ class FlatShadow {
 		const attributes = this.elementToAttachTo.attributes;
 
 		// check for angle attribute, set default to 45;
-		this.angle = attributes.getNamedItem('flatshadowangle')
-			? parseInt(attributes.getNamedItem('flatshadowangle').value)
+		this.angle = attributes.getNamedItem('flatshadow-angle')
+			? parseInt(attributes.getNamedItem('flatshadow-angle').value)
 			: 45;
 
 		// check for color attribute, set default to calculated darker color of bg.
 
-		this.color = attributes.getNamedItem('flatshadowcolor')
-			? attributes.getNamedItem('flatshadowcolor').value
+		this.color = attributes.getNamedItem('flatshadow-color')
+			? attributes.getNamedItem('flatshadow-color').value
 			: this.calculateColor();
 
 		// check for blur attribute, set default to 0
@@ -69,33 +69,35 @@ class FlatShadow {
 			: 0;
 
 		// check for length attribute, set default to 1
-		this.shadowLength = attributes.getNamedItem('FlatShadowlength')
-			? parseInt(attributes.getNamedItem('flatshadowlength').value)
+		this.shadowLength = attributes.getNamedItem('FlatShadow-length')
+			? parseInt(attributes.getNamedItem('flatshadow-length').value)
 			: 1000;
 
 		// check for step attribute, set default to 1000
-		this.step = attributes.getNamedItem('FlatShadowstepsize')
-			? parseInt(attributes.getNamedItem('flatshadowstepsize').value)
+		this.step = attributes.getNamedItem('FlatShadow-stepsize')
+			? parseInt(attributes.getNamedItem('flatshadow-stepsize').value)
 			: 2;
 
 		// check for tracking attribute, set default to false
 		this.trackingEnabled = attributes.getNamedItem(
-			'flatshadowenabletracking'
+			'flatshadow-enabletracking'
 		)
-			? attributes.getNamedItem('flatshadowenabletracking').value
+			? attributes.getNamedItem('flatshadow-enabletracking').value
 			: false;
 
 		// check for logging attribute, set default to false
-		this.loggingEnabled = attributes.getNamedItem('flatshadowenablelogging')
-			? attributes.getNamedItem('flatshadowenablelogging').value
+		this.loggingEnabled = attributes.getNamedItem(
+			'flatshadow-enablelogging'
+		)
+			? attributes.getNamedItem('flatshadow-enablelogging').value
 			: false;
 
-		this.hover = attributes.getNamedItem('flatshadowhover')
-			? attributes.getNamedItem('flatshadowhover').value
+		this.hover = attributes.getNamedItem('flatshadow-hover')
+			? attributes.getNamedItem('flatshadow-hover').value
 			: false;
 
-		this.forceText = attributes.getNamedItem('flatshadowforcetext')
-			? attributes.getNamedItem('flatshadowforcetext').value
+		this.forceText = attributes.getNamedItem('flatshadow-forcetext')
+			? attributes.getNamedItem('flatshadow-forcetext').value
 			: false;
 
 		// if a options catalogue is provided, override the values provided in the catalogue
