@@ -212,7 +212,7 @@ class FlatShadow {
 			if (result != undefined && result != null) {
 				// check if the result is numeric, if yes, parse it as integer
 
-				if (result.match(/[0-9]/gim)) {
+				if (result.match(/[0-9]+$/gim)) {
 					result = parseInt(result);
 				}
 
