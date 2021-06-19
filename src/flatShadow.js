@@ -207,13 +207,17 @@ class FlatShadow {
 
 			let result = targetElement.getAttribute(`flatshadow-${prop}`);
 
-			if (result.match(/[0-9]/gi)) {
-				result = parseInt(result);
-			}
-
 			// if the property is not undefined, add it to the Attributes object
 
 			if (result != undefined && result != null) {
+				// check if the result is numeric, if yes, parse it as integer
+
+				if (result.match(/[0-9]/gim)) {
+					result = parseInt(result);
+				}
+
+				// assign the attribute
+
 				Attributes[prop] = result;
 			}
 		});
