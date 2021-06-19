@@ -193,7 +193,6 @@ class FlatShadow {
 			'color',
 			'blur',
 			'shadowLength',
-			'opacity',
 			'step',
 			'trackingEnabled',
 			'hover',
@@ -207,6 +206,10 @@ class FlatShadow {
 			// look up the property
 
 			let result = targetElement.getAttribute(`flatshadow-${prop}`);
+
+			if (result.match(/[0-9]/gi)) {
+				result = parseInt(result);
+			}
 
 			// if the property is not undefined, add it to the Attributes object
 
