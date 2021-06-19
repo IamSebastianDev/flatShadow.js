@@ -497,7 +497,7 @@ class FlatShadow {
 
 		// randomly look up 12 of those chars and create a output string
 		for (let i = 0; i < 12; i++) {
-			uuid.push(chars[Math.floor(Math.random() * 1) * chars.length]);
+			uuid.push(chars[Math.floor(Math.random() * chars.length) * 1]);
 		}
 
 		return uuid.join('');
