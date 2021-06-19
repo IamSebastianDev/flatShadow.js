@@ -92,7 +92,8 @@ class FlatShadow {
 		// internalize the target element and add a fsid attribute which will be used for styling only the target element.
 
 		this.targetElement = targetElement;
-		this._fsid = Date.now();
+
+		this._fsid = this._createUUID();
 		this.targetElement.setAttribute('fsid', this._fsid);
 
 		// create and data uri stylesheet link, that the css can later be attached to
@@ -477,6 +478,29 @@ class FlatShadow {
 
 		// request an animation frame to update the shadow
 		window.requestAnimationFrame(this._renderShadow.bind(this));
+	}
+
+	/**
+	 
+	 	@description the _createUUID method creates a 12 charactler long unique string usable as id.
+	 
+		@returns { String } a 12 character long uuid string usable as unique id
+	
+	*/
+
+	_createUUID() {
+		// list of usable characters
+		const chars =
+			'aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ0123456789';
+
+		let uuid = [];
+
+		// randomly look up 12 of those chars and create a output string
+		for (let i = 0; i < 12; i++) {
+			uuid.push(chars[Math.floor(Math.random() * 1) * chars.length]);
+		}
+
+		return uuid.join('');
 	}
 
 	/** 
