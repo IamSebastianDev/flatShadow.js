@@ -1,0 +1,19 @@
+{
+  "name": "flatshadow",
+  "version": "1.0.0",
+  "description": "A small library to generate stylistic shadows",
+  "main": "index.js",
+  "scripts": {
+    "minify": "uglifyjs ./src/flatShadow.js -c toplevel -m -o ./dist/flatShadow.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MonsterTeddy/flatShadow.js.git"
+  },
+  "author": "Sebastian Heinz",
+  "license": "MIT",
+  "homepage": "https://flatshadow.vercel.app",
+  "devDependencies": {
+    "uglify-js": "^3.13.9"
+  }
+}
