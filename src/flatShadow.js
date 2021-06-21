@@ -543,7 +543,7 @@ class FlatShadow {
 
 	_setValue(prop, value) {
 		if (!isNaN(parseFloat(value))) {
-			this._shadowAttributes[prop] = parseFloat(value);
+			this._shadowAttributes[prop] = parseFloat(Math.abs(value));
 			this._renderShadow();
 		} else if (this._shadowAttributes.debug) {
 			console.warn(
