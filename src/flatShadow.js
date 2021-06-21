@@ -547,7 +547,7 @@ class FlatShadow {
 			this._renderShadow();
 		} else if (this._shadowAttributes.debug) {
 			console.warn(
-				`FlatShadow: ${value} is not an Integer or Float. This value should be parseable to type Number.`
+				`FlatShadow: ${value} for ${prop} is not an Integer or Float. This value should be parseable to type Number.`
 			);
 		}
 	}
@@ -590,6 +590,15 @@ class FlatShadow {
     */
 
 	set step(value) {
+		if (value == 0) {
+			if (
+				this._shadowAttributes.debug(
+					`FlatShadow: ${value} for step should not be set to 0.`
+				)
+			)
+				return;
+		}
+
 		this._setValue('step', value);
 	}
 
