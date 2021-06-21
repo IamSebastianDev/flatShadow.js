@@ -592,9 +592,7 @@ class FlatShadow {
 	set step(value) {
 		if (value == 0) {
 			if (this._shadowAttributes.debug) {
-				console.warn(
-					`FlatShadow: ${value} for step should not be set to 0.`
-				);
+				console.warn(`FlatShadow: Step should not be set to ${value}.`);
 			}
 
 			return;
