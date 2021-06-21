@@ -541,6 +541,17 @@ class FlatShadow {
 
     */
 
+	_setValue(prop, value) {
+		if (!isNaN(parseFloat(value))) {
+			this._shadowAttributes[prop] = parseFloat(value);
+			this._renderShadow();
+		} else if (this._shadowAttributes.debug) {
+			console.warn(
+				`FlatShadow: ${value} is not an Integer or Float. This value should be parseable to type Number.`
+			);
+		}
+	}
+
 	/**
     
         @param { Number } value - the new angle to set on the element.
@@ -548,8 +559,7 @@ class FlatShadow {
     */
 
 	set angle(value) {
-		this._shadowAttributes.angle = value;
-		this._renderShadow();
+		this._setValue('angle', value);
 	}
 
 	/**
@@ -559,7 +569,7 @@ class FlatShadow {
     */
 
 	set color(value) {
-		this._shadowAttributes.color = color;
+		this._shadowAttributes.color = value;
 		this._renderShadow();
 	}
 
@@ -570,8 +580,7 @@ class FlatShadow {
     */
 
 	set blur(value) {
-		this._shadowAttributes.blur = value;
-		this._renderShadow();
+		this._setValue('blur', value);
 	}
 
 	/**
@@ -581,8 +590,7 @@ class FlatShadow {
     */
 
 	set step(value) {
-		this._shadowAttributes.step = value;
-		this._renderShadow();
+		this._setValue('step', value);
 	}
 
 	/**
@@ -592,8 +600,7 @@ class FlatShadow {
     */
 
 	set shadowLength(value) {
-		this._shadowAttributes.shadowLength = value;
-		this._renderShadow();
+		this._setValue('shadowLength', value);
 	}
 
 	/**
