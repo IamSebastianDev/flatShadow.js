@@ -178,6 +178,11 @@ Set the hover attribute to true to have the shadow only appear on a hover. The d
 let options = { trackingEnabled: "false" }
 ```
 
+```JS
+// set the tracking directly on the shadow using a setter
+shadow.trackingEnabled = "false"
+```
+
 Enable tracking to have the shadow angle follow the mouse. This gives the impression that your mouse cursor is the source of light for the shadow. This attribute is very perfomance hungry, experiment with step size and shadow length to get a smooth result. This is disabled by default, and will not work even if set to true on mobile and touch devices.
 
 ### Forcing a text-shadow &lt;Boolean&gt;
@@ -190,6 +195,8 @@ Enable tracking to have the shadow angle follow the mouse. This gives the impres
 // set the shadow type of the shadow in the options object provided to the constructor
 let options = { forceText: "false" }
 ```
+
+
 FlatShadow will try to detect if the shadow should be a box or a text shadow. Sometimes this is not intended, or fails. You can use this method to force a text shadow on an element. This is disabled by default.
 
 ### Debug &lt;Boolean&gt;

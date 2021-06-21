@@ -346,7 +346,6 @@ class FlatShadow {
 
 	_updateElementOnScroll() {
 		this._elementDimension = this.targetElement.getBoundingClientRect();
-		this._isCurrentlyVisible = this._checkForVisibilty();
 	}
 
 	/**
@@ -386,25 +385,24 @@ class FlatShadow {
 		// the mouse move ev listener will call the tracking update
 
 		// check if the tracker property already exists if yes, return early, if no, create the properties
-		if (!this._tracker) {
-			this._tracker = {};
-		} else {
+		if (this._trackerEstablished) {
 			return;
 		}
 
-		this._tracker.move = window.addEventListener('mousemove', (ev) => {
-			this._trackShadow(ev);
-		});
+		// create a local copy of the ev listeners to be able to remove them
+
+		this._mouseMoveTracker = this._trackShadow.bind(this);
+		this._scrollUpdater = this._updateElementOnScroll.bind(this);
+
+		window.addEventListener('mousemove', this._mouseMoveTracker);
 
 		// the scroll ev listener is used to determine if the element is currently visible. The reasoning being, that only a scroll can change the visibilty, not a mouse move.
 
-		this._tracker.scroll = window.addEventListener('scroll', (ev) => {
-			this._updateElementOnScroll();
-		});
+		window.addEventListener('scroll', this._scrollUpdater);
 
 		// set the trackerEnabled property to true;
 
-		this._trackerEnabled = true;
+		this._trackerEstablished = true;
 	}
 
 	/**
@@ -415,14 +413,14 @@ class FlatShadow {
 
 	_removeTracker() {
 		// if there are no trackers, return early
-		if (!this._trackers) {
+		if (!this._trackerEstablished) {
 			return;
 		}
 
-		window.removeEventListener('mousemove', this._tracker.move);
-		window.removeEventListener('scroll', this._tracker.scroll);
+		window.removeEventListener('mousemove', this._mouseMoveTracker);
+		window.removeEventListener('scroll', this._scrollUpdater);
 
-		this._trackers = undefined;
+		this._trackerEstablished = false;
 	}
 	/**
     
@@ -433,7 +431,7 @@ class FlatShadow {
 
 	_trackShadow(ev) {
 		// check if the element is visibile, if not, return early
-		if (!this._isCurrentlyVisible) {
+		if (!this._checkForVisibilty()) {
 			return;
 		}
 
