@@ -58,11 +58,11 @@ let options = {
 let shadow = new FlatShadow(document.querySelector(".add-shadow"), options)
 ```
 
-## Attributes
+## API & Attributes
 
 Attributes are used to style the Shadow. There are three different ways to style the Shadows, depending on how you create the Shadow. You can use custom HTML-Attributes, a options catalouge when creating the Shadow with JavaScript, or use the provided Methods directly on the created Shadow object. Mixing and matching is possible, which makes flatShadow super flexible.
 
-###Angle &lt;Number&gt;
+### Angle &lt;Number&gt;
 ```HTML
 <elem flatshadow-angle="45">
 ```
@@ -79,7 +79,7 @@ shadow.angle = 45
 
 The angle attribute describes the angle of the shadow. 0° is straigt down, 180° is straight up. The default angle is 45deg.
 
-###Length &lt;Number&gt;
+### Length &lt;Number&gt;
 
 ```HTML
 <elem flatshadow-shadowlength="1000">
