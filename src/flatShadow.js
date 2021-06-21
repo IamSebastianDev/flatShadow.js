@@ -140,26 +140,10 @@ class FlatShadow {
 		// call the first paint
 		this._renderShadow();
 
-		/*
+		// if tracking is enabled, create the tracker
 
-            If tracking is enabled, event listeners for mouse move & scroll are added to the window, that will continously render the shadow to it's correct position when the mouse is moved.  
-
-        */
 		if (this._shadowAttributes.trackingEnabled) {
-			// the mouse move ev listener will call the tracking update
-
-			// if tracking is eanbled, get the visibilty of the element
-			this._isCurrentlyVisible = this._checkForVisibilty();
-
-			window.addEventListener('mousemove', (ev) => {
-				this._trackShadow(ev);
-			});
-
-			// the scroll ev listener is used to determine if the element is currently visible. The reasoning being, that only a scroll can change the visibilty, not a mouse move.
-
-			window.addEventListener('scroll', (ev) => {
-				this._updateElementOnScroll();
-			});
+			this._createTracker();
 		}
 
 		// if debug is enabled, log the shadow to the console
@@ -213,8 +197,8 @@ class FlatShadow {
 			if (result != undefined && result != null) {
 				// check if the result is numeric, if yes, parse it as integer
 
-				if (result.match(/[0-9]+$/gim)) {
-					result = parseInt(result);
+				if (!isNaN(parseFloat(result))) {
+					result = parseFloat(result);
 				}
 
 				// assign the attribute
@@ -393,6 +377,54 @@ class FlatShadow {
 	}
 
 	/**
+	
+		@description the _createTracker method is used to create the ev listeners used for tracking shadows.
+	 
+	*/
+
+	_createTracker() {
+		// the mouse move ev listener will call the tracking update
+
+		// check if the tracker property already exists if yes, return early, if no, create the properties
+		if (!this._tracker) {
+			this._tracker = {};
+		} else {
+			return;
+		}
+
+		this._tracker.move = window.addEventListener('mousemove', (ev) => {
+			this._trackShadow(ev);
+		});
+
+		// the scroll ev listener is used to determine if the element is currently visible. The reasoning being, that only a scroll can change the visibilty, not a mouse move.
+
+		this._tracker.scroll = window.addEventListener('scroll', (ev) => {
+			this._updateElementOnScroll();
+		});
+
+		// set the trackerEnabled property to true;
+
+		this._trackerEnabled = true;
+	}
+
+	/**
+	 
+		@description the _removeTracker method is used to remove trackers created by the @see _createTracker method.
+	
+	*/
+
+	_removeTracker() {
+		// if there are no trackers, return early
+		if (!this._trackers) {
+			return;
+		}
+
+		window.removeEventListener('mousemove', this._tracker.move);
+		window.removeEventListener('scroll', this._tracker.scroll);
+
+		this._trackers = undefined;
+	}
+	/**
     
         @description the _trackShadow method is used to create and update a tracking shadow that moves with the mouse as light source
 
@@ -566,13 +598,29 @@ class FlatShadow {
 
 	/**
     
-        @param { Boolean } value - the new value for the shadow length.
+        @param { Boolean } value - the new value of the hover property.
 
     */
 
 	set hover(value) {
 		this._shadowAttributes.hover = value;
 		this._renderShadow();
+	}
+
+	/**
+    
+        @param { Boolean } value - the new value of the tracking property
+
+    */
+
+	set trackingEnabled(value) {
+		this._shadowAttributes.trackingEnabled = value;
+
+		if (value) {
+			this._createTracker();
+		} else {
+			this._removeTracker();
+		}
 	}
 }
 
