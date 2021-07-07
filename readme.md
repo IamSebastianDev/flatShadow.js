@@ -38,7 +38,7 @@ Shadows added this way can be styled with custom attributes. Learn more about at
 
 ```HTML
 <h1 class="flatShadow" flatShadow-Angle="45deg" flatShadow-Blur="4">
-``
+```
 
 You can also add a Shadow using Javascript:
 
