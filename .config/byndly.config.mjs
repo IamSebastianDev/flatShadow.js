@@ -5,8 +5,12 @@
  */
 
 const bootstrap = ({ FlatShadow }) => {
-    console.log({ FlatShadow });
+    const element = document.createElement('div');
+    document.body.appendChild(element);
     // Your bootstrapping code goes here.
+
+    const shadow = new FlatShadow(element);
+    console.log({ shadow });
 };
 /**
  * @type { import("byndly").UserConfig }
