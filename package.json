@@ -13,9 +13,11 @@
     "@commitlint/config-conventional": "^17.3.0",
     "@rollup/plugin-commonjs": "^23.0.2",
     "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-terser": "^0.2.0",
     "@types/node": "^18.11.9",
     "alex": "^11.0.0",
     "ava": "^5.1.0",
+    "byndly": "^1.1.0",
     "esbuild": "^0.16.4",
     "husky": "^8.0.2",
     "prettier": "^2.8.0",
@@ -35,18 +37,26 @@
     "setup": "npx husky install",
     "build": " rollup -c .config/rollup.config.js",
     "dev": "yarn build --watch",
+    "serve": "yarn byndly --c .config/byndly.config.mjs",
     "lint": "alex .",
     "semantic-release": "semantic-release --branches release",
     "test": "ava"
   },
   "ava": {
-		"extensions": {
-			"ts": "module"
-		},
-		"nodeArguments": [
+    "extensions": {
+      "ts": "module"
+    },
+    "nodeArguments": [
       "--no-warnings",
-			"--loader=ts-node/esm",
-			"--experimental-specifier-resolution=node"
-		]
-	}
+      "--loader=ts-node/esm",
+      "--experimental-specifier-resolution=node"
+    ]
+  },
+  "name": "flatshadow",
+  "version": "1.0.0",
+  "description": "FlatShadow.js is a lightweight library to generate stylistic shadows.",
+  "repository": "https://github.com/MonsterTeddy/flatShadow.js.git",
+  "author": "Sebastian <sebastian@iamsebastian.dev>",
+  "private": false,
+  "unpkg": "./dist/index.browser.min.js"
 }
